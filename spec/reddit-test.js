@@ -50,5 +50,16 @@ describe('Reddit Test FTW', function () {
 
   })
 
+  // it('should add a new comment', function () {
+  //   element(by.css('#add-comment')).click();
+  //   element.all(by.tagName('input[type=text]')).get(6).sendKeys('testPerson')
+  //   element.all(by.tagName('input[type=text]')).get(7).sendKeys('This is a test')
+  //   element.all(by.tagName('input')).get(8).click();
+  //   element.all(by.className('comments')).get(0).click();
+  //   expect(element.all(by.repeater('comment in post.comments').row(3).column('comment.text')).getText()).toContain('This is a test');
+  //
+  // })
+
+
 
 })
