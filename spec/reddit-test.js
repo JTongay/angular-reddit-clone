@@ -44,21 +44,26 @@ describe('Reddit Test FTW', function () {
   })
 
   it('should show all of the comments on click', function () {
-    element.all(by.className('comments')).get(0).click();
+    element.all(by.css('.comments')).get(0).click();
     expect(element.all(by.repeater('comment in post.comments').row(0).column('comment.text')).getText()).toContain('Yea, so what? I used React and it was way easier.');
     expect(element.all(by.repeater('comment in post.comments').row(1).column('comment.text')).getText()).toContain('Vue is better....');
 
   })
 
+  // WHY YOU NO WORK???
   // it('should add a new comment', function () {
-  //   element(by.css('#add-comment')).click();
-  //   element.all(by.tagName('input[type=text]')).get(6).sendKeys('testPerson')
-  //   element.all(by.tagName('input[type=text]')).get(7).sendKeys('This is a test')
-  //   element.all(by.tagName('input')).get(8).click();
+  //   element.all(by.css('#add-comment')).get(0).click();
+  //   element.all(by.tagName('input[placeholder="Created By"]')).get(0).sendKeys('testPerson')
+  //   element.all(by.tagName('input[placeholder="Comment"]')).get(0).sendKeys('This is a test')
+  //   element.all(by.tagName('input[type="submit"]')).get(1).click();
   //   element.all(by.className('comments')).get(0).click();
   //   expect(element.all(by.repeater('comment in post.comments').row(3).column('comment.text')).getText()).toContain('This is a test');
   //
   // })
+
+  it('should format the date', function () {
+    expect(element.all(by.repeater('post in view.posts').row(0).column('post.date')).getText()).toMatch('October 30, 2016')
+  })
 
 
 

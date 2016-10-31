@@ -74,13 +74,13 @@
                         <h4>Created By: {{post.author}}</h4>
                         <h4 ng-class="{negative: post.votes < 0, even: post.votes === 0, positive: post.votes > 0}">{{post.votes}}</h4><button type="button" ng-click="upvote(post)"><span class="glyphicon glyphicon-arrow-up"></span></button><button type="button" ng-click="downvote(post)"><span class="glyphicon glyphicon-arrow-down"></span></button>
                         <p>{{post.description}}</p>
-                        <span class='comments'> {{post.date | date: 'longDate'}} | 
+                        <span> {{post.date | date: 'longDate'}} </span> | <span class='comments'>
                           <ng-pluralize ng-click='showComments(post)' count='post.comments.length'
                           when="{'0': '0 Comments',
                           '1': '1 Comment',
                           'other': '{} Comments'}">
-                        </ng-pluralize> | <span class='glyphicon glyphicon-comment'></span><span id='add-comment' ng-click='makeComments(post)'> Add Comment</span>
-                        </span>
+                        </ng-pluralize></span> | <span class='glyphicon glyphicon-comment'></span><span id='add-comment' ng-click='makeComments(post)'> Add Comment</span>
+
 
                         <div ng-show='post.showComment'>
                           <div ng-repeat='comment in post.comments'>
