@@ -3,6 +3,9 @@ var app = angular.module( 'reddit', [] )
 app.controller( 'frontPage', [ '$scope', ( $scope ) => {
     $scope.view = {};
     $scope.view.welcome = 'Welcome to the Front Page';
+    $scope.view.maxWidth = '400';
+    $scope.view.maxHeight = '400';
+
 
     $scope.view.posts = [ {
         title: 'Check this out!',

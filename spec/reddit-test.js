@@ -24,7 +24,10 @@ describe('Reddit Test FTW', function () {
     expect(element.all(by.repeater('post in view.posts').row(0)).getText()).toMatch('I made this place in Angular!! Isn\'t it cool??');
     expect(element.all(by.repeater('post in view.posts').row(1)).getText()).toMatch('Really though, I enjoy the weather and architecture.');
     expect(element.all(by.repeater('post in view.posts').row(2)).getText()).toMatch('And this place is lovely.');
+  })
 
+  it('should show the number of comments on a post', function () {
+    expect(element.all(by.repeater('post in view.posts').row(0)).getText()).toMatch('3 Comments');
   })
 
 

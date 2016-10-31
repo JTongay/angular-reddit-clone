@@ -40,19 +40,27 @@
             </div>
             <!-- /.container-fluid -->
         </nav>
-        <h1>{{ view.welcome }}</h1>
+        <h1 class="text-center">{{ view.welcome }}</h1>
         <div ng-repeat='post in view.posts'>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-6 col-md-4">
                         <div class="thumbnail">
-                            <img ng-src="{{post.imageURL}}" alt="...">
+                            <img ng-src="{{post.imageURL}}" height="{{view.maxHeight}}" width="{{view.maxWidth}}" alt="...">
                         </div>
                     </div>
                     <div class="caption">
                       <h3>{{post.title}}</h3>
-                      <h4>{{post.votes}}</h4>
+                      <h4>Created By: {{post.author}}</h4>
+                      <h4>{{post.votes}}<span class="glyphicon glyphicon-arrow-up"></span><span class="glyphicon glyphicon-arrow-down"></span></h4>
                       <p>{{post.description}}</p>
+                        <ng-pluralize count='post.comments.length'
+                                      when="{'0': '0 Comments',
+                                            '1': '1 Comment',
+                                            'other': '{} Comments'}">
+                        </ng-pluralize>
+                        <div ng-repeat='comment in post.comments'>
+                      </div>
                     </div>
                 </div>
             </div>
