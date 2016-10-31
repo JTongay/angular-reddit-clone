@@ -27,7 +27,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create Post</a></li>
+                        <li><a href="" ng-click='showPostForm()'><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create Post</a></li>
                     </ul>
                     <form class="navbar-form navbar-left">
                         <div class="form-group">
@@ -40,6 +40,25 @@
             </div>
             <!-- /.container-fluid -->
         </nav>
+        <form ng-show='view.addingComment' ng-submit='createPost()'>
+          <div class="form-group">
+            <label for="author">Username:</label>
+            <input type="text" class='form-control' ng-model="view.author" placeholder="Username">
+          </div>
+          <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" class='form-control' ng-model="view.title" placeholder="Title">
+          </div>
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <input type="text" class='form-control' ng-model="view.description" placeholder="Description">
+          </div>
+          <div class="form-group">
+            <label for="imgURL">Image URL:</label>
+            <input type="text" class="form-control" ng-model="view.imageURL" placeholder="URL">
+          </div>
+            <input type="submit" class="btn btn-default">
+        </form>
         <h1 class="text-center">{{ view.welcome }}</h1>
         <div ng-repeat='post in view.posts'>
             <div class="container-fluid">
@@ -49,17 +68,33 @@
                             <img ng-src="{{post.imageURL}}" height="{{view.maxHeight}}" width="{{view.maxWidth}}" alt="...">
                         </div>
                     </div>
-                    <div class="caption">
-                      <h3>{{post.title}}</h3>
-                      <h4>Created By: {{post.author}}</h4>
-                      <h4>{{post.votes}}<span class="glyphicon glyphicon-arrow-up"></span><span class="glyphicon glyphicon-arrow-down"></span></h4>
-                      <p>{{post.description}}</p>
-                        <ng-pluralize count='post.comments.length'
-                                      when="{'0': '0 Comments',
-                                            '1': '1 Comment',
-                                            'other': '{} Comments'}">
-                        </ng-pluralize>
-                        <div ng-repeat='comment in post.comments'>
+                    <div class="col-sm-6 col-md-4">
+                      <div class="caption">
+                        <h3>{{post.title}}</h3>
+                        <h4>Created By: {{post.author}}</h4>
+                        <h4>{{post.votes}} <button type="button" ng-click="upvote(post)"><span class="glyphicon glyphicon-arrow-up"></span></button><button type="button" ng-click="downvote(post)"><span class="glyphicon glyphicon-arrow-down"></span></button></h4>
+                        <p>{{post.description}}</p>
+                        <span class='comments'>
+                          <ng-pluralize ng-click='showComments(post)' count='post.comments.length'
+                          when="{'0': '0 Comments',
+                          '1': '1 Comment',
+                          'other': '{} Comments'}">
+                        </ng-pluralize> | <span class='glyphicon glyphicon-comment'></span><span ng-click='makeComments(post)'> Add Comment</span>
+                        </span>
+
+                        <div ng-show='post.showComment'>
+                          <div ng-repeat='comment in post.comments'>
+                            <h5>{{comment.author}}: </h5>
+                            <span>{{comment.text}}</span>
+                          </div>
+                        </div>
+                        <form ng-show='post.makeComment' action="#" ng-submit='addComment(post)'>
+                            <label for="author">Author:</label>
+                            <input type="text" ng-model="view.author" placeholder="Created By">
+                            <label for="text">Comment:</label>
+                            <input type="text" ng-model="view.text" placeholder="Comment">
+                            <input type="submit">
+                        </form>
                       </div>
                     </div>
                 </div>

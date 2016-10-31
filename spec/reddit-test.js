@@ -28,6 +28,26 @@ describe('Reddit Test FTW', function () {
 
   it('should show the number of comments on a post', function () {
     expect(element.all(by.repeater('post in view.posts').row(0)).getText()).toMatch('3 Comments');
+    expect(element.all(by.repeater('post in view.posts').row(1)).getText()).toMatch('2 Comments');
+    expect(element.all(by.repeater('post in view.posts').row(2)).getText()).toMatch('2 Comments');
+
+  })
+
+  it('should increase the votes count on click', function () {
+    element.all(by.className('glyphicon-arrow-up')).get(0).click();
+    expect(element.all(by.repeater('post in view.posts').row(0)).getText()).toMatch('7');
+  })
+
+  it('should decrease the votes count on click', function () {
+    element.all(by.className('glyphicon-arrow-down')).get(0).click();
+    expect(element.all(by.repeater('post in view.posts').row(0)).getText()).toMatch('5');
+  })
+
+  it('should show all of the comments on click', function () {
+    element.all(by.className('comments')).get(0).click();
+    expect(element.all(by.repeater('comment in post.comments').row(0).column('comment.text')).getText()).toContain('Yea, so what? I used React and it was way easier.');
+    expect(element.all(by.repeater('comment in post.comments').row(1).column('comment.text')).getText()).toContain('Vue is better....');
+
   })
 
 
